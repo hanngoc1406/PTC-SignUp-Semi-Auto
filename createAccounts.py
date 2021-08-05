@@ -72,3 +72,12 @@ email.send_keys(finalUser + '@hieucuoi.tech')
 acceptTerm = web.find_element_by_xpath('//*[@id="id_terms"]')
 acceptTerm.click()
 
+while (True):
+    time.sleep(10)
+    try:
+        Finish = web.find_element_by_css_selector('#sign-up-theme > section > div > div > div.form-wrapper.color-block.color-block-lightgray.dog-ear-tl.match > h3')
+        web.quit()
+        break
+    except:
+        continue
+
