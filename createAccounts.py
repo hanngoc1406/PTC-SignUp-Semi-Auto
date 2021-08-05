@@ -2,9 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from functools import total_ordering
 import time
-
-userName = input('Nhap ten muon tao: ')
-password = input('Nhap password muon tao: ')
+from setup import userName, password
 
 web = webdriver.Chrome()
 web.get('https://club.pokemon.com/us/pokemon-trainer-club/sign-up/')
@@ -25,7 +23,7 @@ dob.click()
 yearPressed = web.find_element_by_xpath('//*[@id="id_dob_root"]/div/div/div/div/div[1]/div[1]/div/label')
 yearPressed.click()
 
-# Choose 1996 as year of birth
+# Choose 1996 as the year of birth
 time.sleep(2)
 scrollToYear = web.find_element_by_xpath('//*[@id="id_dob_root"]/div/div/div/div/div[1]/div[1]/div/div/div/ul/li[26]')
 scrollToYear.location_once_scrolled_into_view
@@ -35,16 +33,17 @@ scrollToYear.click()
 confirmDOB = web.find_element_by_xpath('//*[@id="id_dob_root"]/div/div/div/div/div[2]/button')
 confirmDOB.click()
 
-# Continue to Register
+# Continue to SignUp
 continueToReg = web.find_element_by_xpath('//*[@id="sign-up-theme"]/section/div/div/div[1]/form/input[2]')
 continueToReg.click()
 
-# Fill username
+# auto-fill every field
 f = open("index.txt", "r")
 index = f.read()
 userN = web.find_element_by_xpath('//*[@id="id_username"]')
 finalUser = userName + str(index)
-# 
+
+# Return check = 1 
 if(userN.send_keys(finalUser) == True):
     check = 0
 else:
@@ -72,3 +71,4 @@ email.send_keys(finalUser + '@hieucuoi.tech')
 # Accept the Pokemon.com Terms of Use.
 acceptTerm = web.find_element_by_xpath('//*[@id="id_terms"]')
 acceptTerm.click()
+
